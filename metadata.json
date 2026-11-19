@@ -1,0 +1,6 @@
+{
+  "name": "Baddie",
+  "description": "Personal life management, adaptive daily routine, flexible tuition scheduler, study & habit tracker, and Gemini AI productivity assistant.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

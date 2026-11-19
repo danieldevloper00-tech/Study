@@ -1,0 +1,327 @@
+{
+  "entities": {
+    "UserProfile": {
+      "title": "UserProfile",
+      "description": "Single-owner Baddie user profile, timezone, theme, AI mode, dashboard layout, and integration preferences.",
+      "type": "object",
+      "properties": {
+        "userId": { "type": "string" },
+        "displayName": { "type": "string" },
+        "email": { "type": "string" },
+        "timezone": { "type": "string" },
+        "weekStartDay": { "type": "string", "enum": ["SATURDAY", "SUNDAY", "MONDAY"] },
+        "themeMode": { "type": "string", "enum": ["DARK", "LIGHT", "SYSTEM"] },
+        "accentPreset": { "type": "string", "enum": ["LAVENDER", "SAGE", "SLATE", "AMBER"] },
+        "compactLayout": { "type": "boolean" },
+        "aiMode": { "type": "string", "enum": ["OBSERVER", "ADVISOR", "AUTOPILOT"] },
+        "dailyStudyTargetMinutes": { "type": "integer" },
+        "onboardingComplete": { "type": "boolean" },
+        "widgetOrder": { "type": "array" },
+        "hiddenWidgets": { "type": "array" },
+        "telegramEnabled": { "type": "boolean" },
+        "telegramChatId": { "type": "string" },
+        "telegramPrefs": { "type": "array" },
+        "uptimeEnabled": { "type": "boolean" },
+        "createdAt": { "type": "string", "format": "date-time", "description": "FieldValue.serverTimestamp()" },
+        "updatedAt": { "type": "string", "format": "date-time", "description": "FieldValue.serverTimestamp()" }
+      },
+      "required": ["userId", "displayName", "timezone", "createdAt", "updatedAt"]
+    },
+    "BaddieTask": {
+      "title": "BaddieTask",
+      "description": "Task with subtasks, priority, category, duration, recurrence, and completion timestamp.",
+      "type": "object",
+      "properties": {
+        "userId": { "type": "string" },
+        "title": { "type": "string" },
+        "description": { "type": "string" },
+        "category": { "type": "string" },
+        "subject": { "type": "string" },
+        "priority": { "type": "string", "enum": ["LOW", "MEDIUM", "HIGH", "URGENT"] },
+        "status": { "type": "string", "enum": ["PENDING", "IN_PROGRESS", "COMPLETED", "CANCELLED"] },
+        "completed": { "type": "boolean" },
+        "dueDate": { "type": "string" },
+        "startTime": { "type": "string" },
+        "estimatedMinutes": { "type": "integer" },
+        "actualMinutes": { "type": "integer" },
+        "progressPercent": { "type": "integer" },
+        "recurrence": { "type": "string" },
+        "tags": { "type": "array" },
+        "notes": { "type": "string" },
+        "reminderMinutesBefore": { "type": "integer" },
+        "goalId": { "type": "string" },
+        "sortOrder": { "type": "integer" },
+        "subtasks": { "type": "array" },
+        "completedAtMillis": { "type": "integer" },
+        "createdAt": { "type": "string", "format": "date-time" },
+        "updatedAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["userId", "title", "category", "priority", "status", "completed", "createdAt", "updatedAt"]
+    },
+    "RoutineBlock": {
+      "title": "RoutineBlock",
+      "description": "Customizable daily routine block supporting weekday overrides and overlap detection.",
+      "type": "object",
+      "properties": {
+        "userId": { "type": "string" },
+        "title": { "type": "string" },
+        "blockType": { "type": "string" },
+        "startTime": { "type": "string" },
+        "endTime": { "type": "string" },
+        "durationMinutes": { "type": "integer" },
+        "repeatDays": { "type": "array" },
+        "reminderEnabled": { "type": "boolean" },
+        "notes": { "type": "string" },
+        "sortOrder": { "type": "integer" },
+        "lastCompletedDate": { "type": "string" },
+        "createdAt": { "type": "string", "format": "date-time" },
+        "updatedAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["userId", "title", "blockType", "startTime", "endTime", "durationMinutes", "createdAt", "updatedAt"]
+    },
+    "TeacherProfile": {
+      "title": "TeacherProfile",
+      "description": "Independent teacher profile supporting fixed or flexible weekly tuition cadence.",
+      "type": "object",
+      "properties": {
+        "userId": { "type": "string" },
+        "name": { "type": "string" },
+        "subject": { "type": "string" },
+        "defaultWeekdays": { "type": "array" },
+        "flexibleWeekly": { "type": "boolean" },
+        "targetSessionsPerWeek": { "type": "integer" },
+        "preferredTime": { "type": "string" },
+        "expectedDurationMinutes": { "type": "integer" },
+        "contactInfo": { "type": "string" },
+        "notes": { "type": "string" },
+        "active": { "type": "boolean" },
+        "createdAt": { "type": "string", "format": "date-time" },
+        "updatedAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["userId", "name", "subject", "active", "createdAt", "updatedAt"]
+    },
+    "TuitionSession": {
+      "title": "TuitionSession",
+      "description": "Scheduled, rescheduled, extra, or historical tuition session preserving original metadata.",
+      "type": "object",
+      "properties": {
+        "userId": { "type": "string" },
+        "teacherId": { "type": "string" },
+        "teacherName": { "type": "string" },
+        "subject": { "type": "string" },
+        "sessionDate": { "type": "string" },
+        "startTime": { "type": "string" },
+        "durationMinutes": { "type": "integer" },
+        "status": { "type": "string" },
+        "originalDate": { "type": "string" },
+        "originalTime": { "type": "string" },
+        "rescheduledFromId": { "type": "string" },
+        "extraSession": { "type": "boolean" },
+        "notes": { "type": "string" },
+        "createdAt": { "type": "string", "format": "date-time" },
+        "updatedAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["userId", "subject", "sessionDate", "startTime", "durationMinutes", "status", "createdAt", "updatedAt"]
+    },
+    "StudySubject": {
+      "title": "StudySubject",
+      "description": "Academic subject with chapters, confidence level, pending topics, and study totals.",
+      "type": "object",
+      "properties": {
+        "userId": { "type": "string" },
+        "name": { "type": "string" },
+        "colorHex": { "type": "string" },
+        "confidenceLevel": { "type": "integer" },
+        "totalStudyMinutes": { "type": "integer" },
+        "pendingTopics": { "type": "string" },
+        "examPrepNotes": { "type": "string" },
+        "chapters": { "type": "array" },
+        "createdAt": { "type": "string", "format": "date-time" },
+        "updatedAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["userId", "name", "confidenceLevel", "totalStudyMinutes", "createdAt", "updatedAt"]
+    },
+    "StudySession": {
+      "title": "StudySession",
+      "description": "Completed Pomodoro, custom timer, or manual study session.",
+      "type": "object",
+      "properties": {
+        "userId": { "type": "string" },
+        "subjectId": { "type": "string" },
+        "subjectName": { "type": "string" },
+        "sessionDate": { "type": "string" },
+        "durationMinutes": { "type": "integer" },
+        "mode": { "type": "string" },
+        "notes": { "type": "string" },
+        "createdAt": { "type": "string", "format": "date-time" },
+        "updatedAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["userId", "subjectName", "sessionDate", "durationMinutes", "mode", "createdAt", "updatedAt"]
+    },
+    "Habit": {
+      "title": "Habit",
+      "description": "Editable daily or custom-frequency habit with completion date logs.",
+      "type": "object",
+      "properties": {
+        "userId": { "type": "string" },
+        "title": { "type": "string" },
+        "frequency": { "type": "string" },
+        "targetDaysPerWeek": { "type": "integer" },
+        "reminderTime": { "type": "string" },
+        "completedDates": { "type": "array" },
+        "notes": { "type": "string" },
+        "active": { "type": "boolean" },
+        "createdAt": { "type": "string", "format": "date-time" },
+        "updatedAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["userId", "title", "frequency", "targetDaysPerWeek", "active", "createdAt", "updatedAt"]
+    },
+    "Goal": {
+      "title": "Goal",
+      "description": "Daily, weekly, monthly, or long-term goal with milestones and linked task progress.",
+      "type": "object",
+      "properties": {
+        "userId": { "type": "string" },
+        "title": { "type": "string" },
+        "description": { "type": "string" },
+        "timeframe": { "type": "string" },
+        "priority": { "type": "string" },
+        "deadline": { "type": "string" },
+        "progressPercent": { "type": "integer" },
+        "autoCalculateFromTasks": { "type": "boolean" },
+        "completed": { "type": "boolean" },
+        "milestones": { "type": "array" },
+        "createdAt": { "type": "string", "format": "date-time" },
+        "updatedAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["userId", "title", "timeframe", "priority", "progressPercent", "completed", "createdAt", "updatedAt"]
+    },
+    "JournalEntry": {
+      "title": "JournalEntry",
+      "description": "Private daily reflection, wins, difficulties, mood, and optional AI summary.",
+      "type": "object",
+      "properties": {
+        "userId": { "type": "string" },
+        "entryDate": { "type": "string" },
+        "mood": { "type": "string" },
+        "energyLevel": { "type": "integer" },
+        "content": { "type": "string" },
+        "wins": { "type": "string" },
+        "difficulties": { "type": "string" },
+        "aiSummary": { "type": "string" },
+        "aiSummaryEnabled": { "type": "boolean" },
+        "createdAt": { "type": "string", "format": "date-time" },
+        "updatedAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["userId", "entryDate", "mood", "energyLevel", "createdAt", "updatedAt"]
+    },
+    "SleepLog": {
+      "title": "SleepLog",
+      "description": "Manual sleep, wake-up, energy, and exercise wellness log.",
+      "type": "object",
+      "properties": {
+        "userId": { "type": "string" },
+        "logDate": { "type": "string" },
+        "sleepTime": { "type": "string" },
+        "wakeTime": { "type": "string" },
+        "durationMinutes": { "type": "integer" },
+        "energyLevel": { "type": "integer" },
+        "mood": { "type": "string" },
+        "exerciseMinutes": { "type": "integer" },
+        "notes": { "type": "string" },
+        "createdAt": { "type": "string", "format": "date-time" },
+        "updatedAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["userId", "logDate", "sleepTime", "wakeTime", "durationMinutes", "energyLevel", "createdAt", "updatedAt"]
+    },
+    "ReminderItem": {
+      "title": "ReminderItem",
+      "description": "Persisted scheduled reminder with timezone and deduplication state.",
+      "type": "object",
+      "properties": {
+        "userId": { "type": "string" },
+        "title": { "type": "string" },
+        "triggerDateTimeIso": { "type": "string" },
+        "timezone": { "type": "string" },
+        "offsetMinutes": { "type": "integer" },
+        "repeatRule": { "type": "string" },
+        "sourceType": { "type": "string" },
+        "sourceId": { "type": "string" },
+        "enabled": { "type": "boolean" },
+        "delivered": { "type": "boolean" },
+        "createdAt": { "type": "string", "format": "date-time" },
+        "updatedAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["userId", "title", "triggerDateTimeIso", "timezone", "enabled", "delivered", "createdAt", "updatedAt"]
+    },
+    "AiActionLog": {
+      "title": "AiActionLog",
+      "description": "Audit log of Gemini AI suggestions and approved/autopilot schedule adjustments.",
+      "type": "object",
+      "properties": {
+        "userId": { "type": "string" },
+        "mode": { "type": "string" },
+        "actionType": { "type": "string" },
+        "summary": { "type": "string" },
+        "approved": { "type": "boolean" },
+        "createdAt": { "type": "string", "format": "date-time" },
+        "updatedAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["userId", "mode", "actionType", "summary", "approved", "createdAt", "updatedAt"]
+    }
+  },
+  "firestore": {
+    "/users/{userId}": {
+      "schema": { "$ref": "#/entities/UserProfile" },
+      "description": "Single-owner user profile and app settings."
+    },
+    "/users/{userId}/tasks/{taskId}": {
+      "schema": { "$ref": "#/entities/BaddieTask" },
+      "description": "User tasks and subtasks."
+    },
+    "/users/{userId}/routine_blocks/{blockId}": {
+      "schema": { "$ref": "#/entities/RoutineBlock" },
+      "description": "User daily routine blocks."
+    },
+    "/users/{userId}/teachers/{teacherId}": {
+      "schema": { "$ref": "#/entities/TeacherProfile" },
+      "description": "User tuition teachers."
+    },
+    "/users/{userId}/tuition_sessions/{sessionId}": {
+      "schema": { "$ref": "#/entities/TuitionSession" },
+      "description": "Tuition sessions including rescheduled and historical entries."
+    },
+    "/users/{userId}/subjects/{subjectId}": {
+      "schema": { "$ref": "#/entities/StudySubject" },
+      "description": "Study subjects and chapter progress."
+    },
+    "/users/{userId}/study_sessions/{sessionId}": {
+      "schema": { "$ref": "#/entities/StudySession" },
+      "description": "Completed study timer and manual sessions."
+    },
+    "/users/{userId}/habits/{habitId}": {
+      "schema": { "$ref": "#/entities/Habit" },
+      "description": "Editable habits and completion date logs."
+    },
+    "/users/{userId}/goals/{goalId}": {
+      "schema": { "$ref": "#/entities/Goal" },
+      "description": "Daily, weekly, monthly, and long-term goals."
+    },
+    "/users/{userId}/journal_entries/{entryId}": {
+      "schema": { "$ref": "#/entities/JournalEntry" },
+      "description": "Private daily journal entries."
+    },
+    "/users/{userId}/sleep_logs/{logId}": {
+      "schema": { "$ref": "#/entities/SleepLog" },
+      "description": "Manual sleep and wellness logs."
+    },
+    "/users/{userId}/reminders/{reminderId}": {
+      "schema": { "$ref": "#/entities/ReminderItem" },
+      "description": "Persisted reminder schedules."
+    },
+    "/users/{userId}/ai_action_logs/{logId}": {
+      "schema": { "$ref": "#/entities/AiActionLog" },
+      "description": "Audit log of AI suggestions and actions."
+    }
+  }
+}
